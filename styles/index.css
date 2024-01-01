@@ -1,0 +1,31 @@
+.sides{
+    
+}
+.side{
+    
+    display: inline-block;
+    width: 400px;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+}
+#image{
+    width: 300px;
+}
+input{
+    display: grid;
+}
+#school-info{
+    
+}
+
+@media screen and (min-width: 800px) {
+    #login-part{
+        margin-left: 35%;
+    }
+    #scgool-info{
+       
+    }
+    .side{
+        margin-left: 200px;
+    }
+  }
