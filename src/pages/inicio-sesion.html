@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciando sesión</title>
+    <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid blue;
+            border-bottom: 16px solid blue;
+            width: 100px;
+            height: 100px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .sides {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        @keyframes pulse {
+            0% {
+            text-shadow: 0 1px 20px rgba(0, 0, 0, 0.8);
+            }
+            50% {
+            text-shadow: 0 0px 20px rgba(0, 0, 0, 0.8);
+            }
+            100% {
+            text-shadow: 0 0px 10px rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        #login-advide {
+            animation: pulse 1.5s infinite;
+            color: rgb(235, 235, 235);
+        }
+
+        .loader {
+            margin-top: 20px; /* Ajusta la distancia entre el mensaje y el loader según tus necesidades */
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="sides" style="z-index: 3;">
+        <h1 id="login-advide">Iniciando sesión...</h1>
+        <div class="loader"></div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="../scripts/inicio-sesion.js" type="module"></script>
+
+    
+
+</body>
+
+</html>

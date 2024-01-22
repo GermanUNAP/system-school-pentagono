@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Virtual</title>
+    <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+    <div class="sides">
+        <div class="side" id="school-info-container">
+            <div class="background-container">
+                <div class="background-content" id="school-info">
+                    <div class="content">
+                        <h1 class="title"><b>Institución educativa privada Pentágono</b></h1>
+                        <h2 class="title">Sistema virtual de asistencia</h2>
+                        <img src="assets/logo1.jpg" alt="" id="image" class="title">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="side" id="login-part-container">
+            <div class="background-container">
+                <div class="background-content" id="login-part">
+                    <div class="content">
+                        <h4>Ingrese sus credenciales</h4>
+                        <form id="login-form">
+                            <input id="email" class="input" type="text" placeholder="pengatonointernational@school.edu.pe">
+                            <input id="password" class="input" type="password" placeholder="Contraseña">
+                            <button class="btn btn-primary mt-3" id="login-btn">Iniciar Sesión</button>
+                        </form>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="scripts/index.js" type="module"></script>
+
+</body>
+
+</html>
