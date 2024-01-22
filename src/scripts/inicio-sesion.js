@@ -10,9 +10,9 @@ onAuthStateChanged(auth, async (user) => {
     console.log(user.uid)
 
     const userData = await getUserDataByUID(auth.currentUser.uid);
-
+    console.log(userData);
     if (userData) {
-      const userType = userData.type; 
+      const userType = userData.tipo; 
       if(userType === "administrador"){
         window.location.href = 'home-admin.html';
       }
@@ -26,7 +26,6 @@ onAuthStateChanged(auth, async (user) => {
       console.log("No se encontraron datos del usuario en Firestore.");
 
     }
-    window.location.href = 'home-admin.html';
   } else {
     window.location.href = '../index.html';
   }
