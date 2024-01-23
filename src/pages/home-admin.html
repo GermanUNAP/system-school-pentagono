@@ -4,97 +4,268 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador</title>
-    <!-- Agrega los enlaces a Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
 
-    <div class="container-fluid">
-        <!-- Encabezado del Dashboard -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark">
-            <div class="container-fluid">
-                <img src="../assets/logo.jpg" alt="Logo" class="img-fluid img-thumbnail" style="max-width: 60px;">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Colegio Pentágono Internacional</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                  </li>
-                </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-              </div>
-            </div>
-          </nav>
+  <div class="container-fluid">
+      <!-- Encabezado del Dashboard -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark">
+        <div class="container-fluid">
+            <img src="../assets/logo.jpg" alt="Logo" class="img-fluid img-thumbnail" style="max-width: 60px;">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Colegio Pentágono Internacional</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Registrar
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalEstudiante">Registrar Estudiante</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalDocente">Registrar Docente</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Eliminar cuenta</a></li>
+                </ul>                
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Subir Excel
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalEstudiante">Lista Estudiantes</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalDocente">Lista docentes</a></li>
+                </ul>                
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Asistencia
+                </a>
+                   
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="..." aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+          </div>
+        </div>
+      </nav>  
+      <!-- Contenido del Dashboard -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Mes</th>
+            <th scope="col">Total</th>
+            <th scope="col">Clases dictadas</th>
+            <th scope="col">Asistencias</th>
+            <th scope="col">Tardanzas</th>
+            <th scope="col">Faltas</th>
+            <th scope="col">Tardanzas justificadas</th>
+            <th scope="col">% tardanzas</th>
+            <th scope="col">ver Informe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-active">
+            <th scope="row">Febrero</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">Marzo</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr class="table-active">
+            <th scope="row">Abril</th>
+            <td colspan="2" >Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">Marzo</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr class="table-active">
+            <th scope="row">Abril</th>
+            <td colspan="2" >Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">Marzo</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr class="table-active">
+            <th scope="row">Abril</th>
+            <td colspan="2" >Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">Marzo</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr class="table-active">
+            <th scope="row">Abril</th>
+            <td colspan="2" >Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">Marzo</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr class="table-active">
+            <th scope="row">Abril</th>
+            <td colspan="2" >Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <!-- Contenido del Dashboard -->
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <!-- Card 1 -->
-                <div class="card">
-                    <div class="card-header bg-success text-white">
-                        Estadísticas
-                    </div>
-                    <div class="card-body">
-                        <!-- Contenido de la estadística -->
-                        <p>Usuarios registrados: 100</p>
-                        <p>Pedidos pendientes: 20</p>
-                    </div>
-                </div>
+      <!-- Botón para cargar información desde Excel -->
+      <div class="mt-4">
+          <input type="file" id="excelFileInput" accept=".xlsx, .xls" class="form-control mb-2">
+          <button class="btn btn-primary" onclick="handleExcelUpload()">Cargar desde Excel</button>
+      </div>
+  </div>
+
+  <!-- Modal para registrar estudiante -->
+  <div class="modal fade" id="modalEstudiante" tabindex="-1" aria-labelledby="modalEstudianteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Contenido del modal para estudiante -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEstudianteLabel">Registrar Estudiante</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario para registrar estudiante -->
+          <form>
+            <div class="mb-3">
+              <label for="dniEstudiante" class="form-label">DNI</label>
+              <input type="text" class="form-control" id="dniEstudiante" required>
             </div>
-            <div class="col-md-8">
-                <!-- Card 2 -->
-                <div class="card">
-                    <div class="card-header bg-warning text-white">
-                        Últimos pedidos
-                    </div>
-                    <div class="card-body">
-                        <!-- Contenido de la lista de últimos pedidos -->
-                        <ul>
-                            <li>Pedido 1</li>
-                            <li>Pedido 2</li>
-                            <li>Pedido 3</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="mb-3">
+              <label for="nombresEstudiante" class="form-label">Nombres</label>
+              <input type="text" class="form-control" id="nombresEstudiante" required>
             </div>
+            <div class="mb-3">
+              <label for="apellidosEstudiante" class="form-label">Apellidos</label>
+              <input type="text" class="form-control" id="apellidosEstudiante" required>
+            </div>
+            <div class="mb-3">
+              <label for="fechaNacimientoEstudiante" class="form-label">Fecha de Nacimiento</label>
+              <input type="date" class="form-control" id="fechaNacimientoEstudiante" required>
+            </div>
+            <div class="mb-3">
+              <label for="gradoEstudiante" class="form-label">Grado</label>
+              <input type="text" class="form-control" id="gradoEstudiante" required>
+            </div>
+            <div class="mb-3">
+              <label for="seccionEstudiante" class="form-label">Sección</label>
+              <input type="text" class="form-control" id="seccionEstudiante" required>
+            </div>
+            <div class="mb-3">
+              <label for="correoEstudiante" class="form-label">Correo</label>
+              <input type="email" class="form-control" id="correoEstudiante" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+          </form>
         </div>
 
-        <!-- Botón para cargar información desde Excel -->
-        <div class="mt-4">
-            <input type="file" id="excelFileInput" accept=".xlsx, .xls" class="form-control mb-2">
-            <button class="btn btn-primary" onclick="handleExcelUpload()">Cargar desde Excel</button>
-        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Agrega los enlaces a Bootstrap JS y Popper.js -->
+  <!-- Modal para registrar docente -->
+  <div class="modal fade" id="modalDocente" tabindex="-1" aria-labelledby="modalDocenteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Contenido del modal para docente -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDocenteLabel">Registrar Docente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario para registrar docente -->
+          <form>
+            <div class="mb-3">
+              <label for="dniDocente" class="form-label">DNI</label>
+              <input type="text" class="form-control" id="dniDocente" required>
+            </div>
+            <div class="mb-3">
+              <label for="nombresDocente" class="form-label">Nombres</label>
+              <input type="text" class="form-control" id="nombresDocente" required>
+            </div>
+            <div class="mb-3">
+              <label for="apellidosDocente" class="form-label">Apellidos</label>
+              <input type="text" class="form-control" id="apellidosDocente" required>
+            </div>
+            <div class="mb-3">
+              <label for="fechaNacimientoDocente" class="form-label">Fecha de Nacimiento</label>
+              <input type="date" class="form-control" id="fechaNacimientoDocente" required>
+            </div>
+            <div class="mb-3">
+              <label for="especialidadDocente" class="form-label">Especialidad</label>
+              <input type="text" class="form-control" id="especialidadDocente" required>
+            </div>
+            <div class="mb-3">
+              <label for="correoDocente" class="form-label">Correo</label>
+              <input type="email" class="form-control" id="correoDocente" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Agrega el enlace a SheetJS para manipulación de archivos Excel -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/xlsx@0.17.3/dist/xlsx.full.min.js"></script>
-    <!-- Agrega tu propio script para manejar la carga de Excel -->
-    <script src="scripts/adminDashboard.js"></script>
-    <script src="../scripts/home-admin.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="../scripts/home-admin.js" type="module" defer></script>
+    <script>
+        function handleExcelUpload() {
+            const excelFileInput = document.getElementById('excelFileInput');
+            const file = excelFileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = async (e) => {
+                    const data = e.target.result;
+                    const workbook = XLSX.read(data, { type: 'binary' });
+                    const sheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[sheetName];
+
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 'A' });
+
+                    console.log(jsonData);
+                    alert('Información cargada exitosamente desde Excel.');
+                };
+
+                reader.readAsBinaryString(file);
+            } else {
+                alert('Por favor, selecciona un archivo Excel válido.');
+            }
+        }
+    </script>
 </body>
 </html>
 

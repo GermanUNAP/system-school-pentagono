@@ -2,7 +2,6 @@ import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.2/fi
 import { auth, db } from '../app/firebase.js';
 import { collection, getDocs, where, query } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
 
-console.log('linked');
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
