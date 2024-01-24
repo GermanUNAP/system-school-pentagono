@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
-
   <div class="container-fluid">
       <!-- Encabezado del Dashboard -->
       <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark">
@@ -43,105 +42,48 @@
                   <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalDocente">Lista docentes</a></li>
                 </ul>                
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Asistencia
+              <li class="nav-item ">
+                <a class="nav-link" href="./SQIZ/B+rU6nZfj7n5I930g==.html" role="button" aria-expanded="false">
+                    Asistencia
                 </a>
-                   
               </li>
+            
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="..." aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
+            
           </div>
         </div>
       </nav>  
-      <!-- Contenido del Dashboard -->
-      <table class="table">
+
+      <table id="table" class="table" data-show-export="true" data-export-types='["json", "xml", "png", "csv", "txt", "sql", "doc", "excel", "xlsx", "pdf"]'>
         <thead>
-          <tr>
-            <th scope="col">Mes</th>
-            <th scope="col">Total</th>
-            <th scope="col">Clases dictadas</th>
-            <th scope="col">Asistencias</th>
-            <th scope="col">Tardanzas</th>
-            <th scope="col">Faltas</th>
-            <th scope="col">Tardanzas justificadas</th>
-            <th scope="col">% tardanzas</th>
-            <th scope="col">ver Informe</th>
-          </tr>
+            <tr>
+                <th scope="col">Mes</th>
+                <th scope="col">Total</th>
+                <th scope="col">Asistencias</th>
+                <th scope="col">Tardanzas</th>
+                <th scope="col">Faltas</th>
+                <th scope="col">Tardanzas justificadas</th>
+                <th scope="col">Tardanzas(%)</th>
+                <th scope="col">Faltas(%)</th>
+            </tr>
         </thead>
         <tbody>
-          <tr class="table-active">
-            <th scope="row">Febrero</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">Marzo</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr class="table-active">
-            <th scope="row">Abril</th>
-            <td colspan="2" >Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-          <tr>
-            <th scope="row">Marzo</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr class="table-active">
-            <th scope="row">Abril</th>
-            <td colspan="2" >Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-          <tr>
-            <th scope="row">Marzo</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr class="table-active">
-            <th scope="row">Abril</th>
-            <td colspan="2" >Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-          <tr>
-            <th scope="row">Marzo</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr class="table-active">
-            <th scope="row">Abril</th>
-            <td colspan="2" >Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-          <tr>
-            <th scope="row">Marzo</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr class="table-active">
-            <th scope="row">Abril</th>
-            <td colspan="2" >Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+            <!-- Aquí se agregarán las filas de datos -->
         </tbody>
       </table>
 
-      <!-- Botón para cargar información desde Excel -->
+
+      <!-- Botones para exportar -->
       <div class="mt-4">
-          <input type="file" id="excelFileInput" accept=".xlsx, .xls" class="form-control mb-2">
-          <button class="btn btn-primary" onclick="handleExcelUpload()">Cargar desde Excel</button>
+        <input type="file" id="excelFileInput" accept=".xlsx, .xls" class="form-control mb-2">
+        <button class="btn btn-primary" onclick="handleExcelUpload()">Cargar desde Excel</button>
+        <button class="btn btn-success" onclick="exportTable()">Exportar a PDF</button>
       </div>
+
   </div>
 
   <!-- Modal para registrar estudiante -->
@@ -236,36 +178,45 @@
     </div>
   </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/xlsx@0.17.3/dist/xlsx.full.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="../scripts/home-admin.js" type="module" defer></script>
-    <script>
-        function handleExcelUpload() {
-            const excelFileInput = document.getElementById('excelFileInput');
-            const file = excelFileInput.files[0];
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/xlsx@0.17.3/dist/xlsx.full.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.2.12/jspdf.plugin.autotable.min.js"></script>
 
-            if (file) {
-                const reader = new FileReader();
+  <script src="../scripts/home-admin.js" type="module" defer></script>
+  <script>
+      function handleExcelUpload() {
+          const excelFileInput = document.getElementById('excelFileInput');
+          const file = excelFileInput.files[0];
 
-                reader.onload = async (e) => {
-                    const data = e.target.result;
-                    const workbook = XLSX.read(data, { type: 'binary' });
-                    const sheetName = workbook.SheetNames[0];
-                    const worksheet = workbook.Sheets[sheetName];
+          if (file) {
+              const reader = new FileReader();
 
-                    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 'A' });
+              reader.onload = async (e) => {
+                  const data = e.target.result;
+                  const workbook = XLSX.read(data, { type: 'binary' });
+                  const sheetName = workbook.SheetNames[0];
+                  const worksheet = workbook.Sheets[sheetName];
 
-                    console.log(jsonData);
-                    alert('Información cargada exitosamente desde Excel.');
-                };
+                  const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 'A' });
 
-                reader.readAsBinaryString(file);
-            } else {
-                alert('Por favor, selecciona un archivo Excel válido.');
-            }
-        }
-    </script>
+                  console.log(jsonData);
+                  alert('Información cargada exitosamente desde Excel.');
+              };
+
+              reader.readAsBinaryString(file);
+          } else {
+              alert('Por favor, selecciona un archivo Excel válido.');
+          }
+      }
+
+      function exportTable() {
+        var doc = new jsPDF()
+          doc.autoTable({ html: '#table' })
+          doc.save('table.pdf')
+      }
+  </script>
 </body>
 </html>
-

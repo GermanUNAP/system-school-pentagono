@@ -1,7 +1,7 @@
 import { onAuthStateChanged, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js';
 import { auth, db } from '../app/firebase.js';
-import { showToast } from '../app/showMesage.js';  // Asegúrate de que la ruta sea correcta
-import { doc, setDoc, getDocs, collection, query, where } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+import { showToast } from '../app/showMesage.js';
+import { doc, getDoc, query, where, getDocs, collection} from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
 
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -11,55 +11,38 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.href = '../index.html';
         } else {
             showToast('Cargando datos', 'success');
-            const mesesAsistencias = [];
-            for (let mes = 1; mes <= 12; mes++) {
-                const asistenciasMes = await filtrarAsistenciasPorMes(mes);
-                mesesAsistencias.push(asistenciasMes);
+            
+            // Obtén el ID de usuario
+            const userId = user.uid;
+            const userDocRef = doc(db, "usuarios", userId);
+            const docSnap = await getDoc(userDocRef);
+
+            document.getElementById('nombreEstudiante').innerText = `Estudiante: `;
+
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+                console.log(userData);
+
+                // Llena los datos en el HTML
+                document.getElementById('nombreEstudiante').innerText = `Estudiante: ${userData.nombres} ${userData.apellidos}`;
+                document.getElementById('gradoEstudiante').innerText = `Grado: ${userData.grado}`;
+                document.getElementById('seccionEstudiante').innerText = `Código: ${userData.seccion}`;
+            } else {
+                console.log("No se encontró documento para el usuario con este UID.");
             }
 
+            const mesesAsistencias = [];
+            for (let mes = 1; mes <= 12; mes++) {
+                const asistenciasMes = await filtrarAsistenciasPorMes(userId, mes);
+                mesesAsistencias.push(asistenciasMes);
+            }
+            console.log(mesesAsistencias);
             // Llenar la tabla con los datos de asistencias por mes
             llenarTablaConAsistenciasPorMes(mesesAsistencias);
         }
     });
 });
 
-//para enviar el modal del estudiante
-document.getElementById('modalEstudiante').addEventListener('submit', async function (event) {
-    event.preventDefault();
-
-    const dni = document.getElementById('dniEstudiante').value;
-    const correo = document.getElementById('correoEstudiante').value;
-    try {
-        const userCredential = await createUserWithEmailAndPassword(auth, correo, dni);
-
-        // Obtén el ID de usuario
-        const userId = userCredential.user.uid;
-
-        // Otros datos que deseas almacenar
-        const nombres = document.getElementById('nombresEstudiante').value;
-        const apellidos = document.getElementById('apellidosEstudiante').value;
-        const fechaNacimiento = document.getElementById('fechaNacimientoEstudiante').value;
-        const grado = document.getElementById('gradoEstudiante').value;
-        const seccion = document.getElementById('seccionEstudiante').value;
-
-        // Guarda los datos en la colección "usuarios"
-        await setDoc(doc(db, "usuarios", userId), {
-            uid: userId,
-            dni: dni,
-            correo: correo,
-            nombres: nombres,
-            apellidos: apellidos,
-            fechaNacimiento: fechaNacimiento,
-            grado: grado,
-            seccion: seccion,
-        });
-
-        showToast('Se ha creado el usuario correctamente', 'success');
-    } catch (error) {
-        console.error('Error al crear el usuario:', error.code, error.message);
-        showToast('Error al crear el usuario. Verifica que los datos sean correctos.', 'error');
-    }
-});
 
 
 // Función para llenar la tabla con los datos de asistencias por mes
@@ -105,19 +88,26 @@ function llenarTablaConAsistenciasPorMes(mesesAsistencias) {
     });
 }
 
-async function filtrarAsistenciasPorMes(mes) {
-    const asistenciasQuery = await getDocs(collection(db, 'asistencias'));
-    const asistenciasFiltradas = [];
-    
-    asistenciasQuery.forEach((doc) => {
+
+async function filtrarAsistenciasPorMes(userId, mes) {
+    const asistenciasCollection = collection(db, 'asistencias');
+
+    // Consulta para obtener las asistencias del usuario actual para el mes dado
+    const q = query(asistenciasCollection, where('uid', '==', userId));
+
+    const asistenciasSnapshot = await getDocs(q);
+
+    const asistenciasMes = [];
+
+    asistenciasSnapshot.forEach((doc) => {
         const asistencia = doc.data();
         const fecha = asistencia.fecha.toDate();
         const mesAsistencia = fecha.getMonth() + 1;
 
         if (mesAsistencia === mes) {
-            asistenciasFiltradas.push(asistencia);
+            asistenciasMes.push(asistencia);
         }
     });
 
-    return asistenciasFiltradas;
+    return asistenciasMes;
 }
